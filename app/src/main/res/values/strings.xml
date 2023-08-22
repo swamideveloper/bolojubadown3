@@ -1,0 +1,95 @@
+<resources>
+
+    <string name="DONE"><![CDATA[<b><font color=#000000>DONE</font></b>]]></string>
+    <string name="special_case">User-Generated Content Policy(UGC) By pressing the <b>&#34;Accept&#34;</b> button, I declare I have read and accepted the following condition of use:</string>
+    <string name="privacy_policy">http://decodeking.com/</string>
+    <string name="app_name">Video Downloader</string>
+
+    <string name="facebook_app_id">770803644405572</string>
+    <string name="Downloads">Downloads</string>
+    <string name="Videos">Videos</string>
+    <string name="Audios">Audios</string>
+    <string name="Images">Images</string>
+    <string name="Dismiss">Dismiss</string>
+    <string name="Complete">Complete</string>
+    <string name="Download">Download</string>
+    <string name="buffering_string">Buffering..</string>
+    <string name="file_deleted">File Deleted.</string>
+    <string name="whatsap">Whatsapp</string>
+    <string name="title1">&lt;font color="#159B66">Video&lt;/font> Downloader &amp; Player</string>
+
+    <string name="Failed">Failed</string>
+    <string name="got_feedback"><u>Got feedback or questions? Tell us</u></string>
+
+    <string name="Title">Title</string>
+    <string name="Preview">Preview</string>
+    <string name="home">(home)</string>
+    <string name="hithere">hi there</string>
+    <string name="Shareusing">Share using</string>
+    <string name="AvailableFiles">Available Files</string>
+    <string name="Pleasewaituntilfirstdownloadcomplete">Please wait until first download complete!</string>
+    <string name="FileDownloadstarted">File Download started</string>
+    <string name="DownloadNow">Download Now</string>
+    <string name="saved_to">Saved to:</string>
+    <string name="Checking">Checking...</string>
+    <string name="SizeUnknown">Size: unknown</string>
+    <string name="getting_downloading_link">Downloading Please Wait…</string>
+    <string name="NameYourfile">Name Your file</string>
+    <string name="whatsapp">Whatsapp</string>
+    <string name="do_u_want_to_dlt">Do you want to delete?</string>
+    <string name="app_not_available">App Not Available.</string>
+    <string name="whatsapp_not_installed">Whtasapp not installed.</string>
+    <string name="intro_txt_3">Click the download button and Choose available option</string>
+    <string name="intro_txt_5">Choose any file to download</string>
+    <string name="intro_txt_6">Name your file and click on \'Download\'</string>
+    <string name="intro_txt_9">Here is your all Download Section</string>
+    <string name="intro_txt_10">Here is your downloaded file</string>
+    <string name="NoUrlFound">No Url Found in you input</string>
+    <string name="Wait">Wait...</string>
+    <string name="Share">Share App</string>
+    <string name="share">Share</string>
+    <string name="PrivacyPolicy">Privacy Policy</string>
+    <string name="Help">Help - How to use </string>
+    <string name="delete">Delete</string>
+    <string name="suretodelete">Are you sure you want to delete?</string>
+    <string name="DownloadComplete">Download Complete</string>
+    <string name="DownloadingAudio">Downloading Audio</string>
+    <string name="DownloadAudioError">Download Audio Error</string>
+    <string name="Downloadingvideo">Downloading video</string>
+    <string name="DownloadvideoCompleteat">Download video Complete at</string>
+    <string name="DownloadvideoError">Download video Error</string>
+    <string name="yes"><font color="#000000">Yes</font></string>
+    <string name="CoppingfileError">Copping file Error</string>
+
+    <string name="no"><font color="#000000">No</font></string>
+    <!--    <string name="Close" color="#000000">CLOSE</string>-->
+    <string name="Close"><![CDATA[<b><font color=#000000>CLOSE</font></b>]]></string>
+    <string name="index_page">file:///android_asset/index.html</string>
+    <string name="_0">0</string>
+    <string name="drive_mode">Drive Mode</string>
+    <string name="go_to_album">Go to Album</string>
+    <string name="go_to_artist">Go to Artist</string>
+    <string name="add_to_playlist">Add to Playlist</string>
+    <string name="song_info">Song Info</string>
+    <string name="save_current_playlist">Save Current Playlist</string>
+    <string name="equalizer">Equalizer</string>
+    <string name="typeToSearch">Type to search music</string>
+    <string name="created_playlists">Created Playlists</string>
+    <string name="latest_added_to_library">LATEST ADDED TO LIBRARY</string>
+
+
+
+    <string name="age_group_one"><b>18-35</b> (Young Adult)</string>
+    <string name="age_group_two"><b>36-49</b> (Aged Adult)</string>
+    <string name="age_group_three"><b>50+</b> (Older Adult)</string>
+    <string name="age_group_head"><b>Prefer Age : </b>Select Your Age</string>
+
+    <string name="stronboarding1">Fast Video Downloader</string>
+    <string name="stronboarding2">HD Video Player</string>
+    <string name="stronboarding3">3D-Bass Boosted MP3</string>
+
+    <string name="strsubonboarding1">Easily download videos and music directly from the Internet onto your device.</string>
+    <string name="strsubonboarding2">Ultra HD 4k Video Player with supports all types of video format.</string>
+    <string name="strsubonboarding3">Enjoy your music with the best Audio Player.</string>
+
+</resources>

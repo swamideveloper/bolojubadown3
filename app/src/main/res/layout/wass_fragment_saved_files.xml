@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/no_files_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/i2"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:adjustViewBounds="true"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:src="@drawable/wass_nodata" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/i2"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/rubik_regular"
+                android:gravity="center"
+                android:text="No Data Found"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp"
+                />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFiles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <RelativeLayout
+            android:id="@+id/iv_no_Found_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/i1"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:adjustViewBounds="true"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:src="@drawable/wass_nodata" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/i1"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/rubik_regular"
+                android:gravity="center"
+                android:text="No Data Found"
+                android:textColor="#000"
+                android:textSize="@dimen/_15sdp"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

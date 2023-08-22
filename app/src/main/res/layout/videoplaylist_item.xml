@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+     <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_margin="@dimen/_4sdp"
+        android:background="@drawable/bg_fol1"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/r1"
+                android:layout_marginVertical="@dimen/_8sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:id="@+id/grid_item_image2"
+                    android:layout_width="@dimen/_46sdp"
+                    android:layout_height="@dimen/_46sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:padding="@dimen/_2sdp"
+                    android:src="@drawable/p" />
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/grid_item_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/pprr"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:paddingHorizontal="5dp"
+                        android:singleLine="true"
+                        android:layout_marginRight="@dimen/_2sdp"
+                        android:text="Unknown"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/grid_item_sublabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/pprr"
+                        android:gravity="center"
+                        android:layout_marginRight="@dimen/_2sdp"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:text="Unknown"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageOverflow"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/more"
+                app:tint="#9CA2B7" />
+
+        </RelativeLayout>
+     </RelativeLayout>
+</RelativeLayout>

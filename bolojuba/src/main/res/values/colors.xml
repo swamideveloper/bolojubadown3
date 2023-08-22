@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="newnn">#00B1F6</color>
+
+    <color name="sdk_bg_color">@color/white</color>
+
+
+
+    <color name="appcolor">#2238CC</color>
+    <color name="selectdot0">#2238CC</color>
+    <color name="undot0">#CDE2FF</color>
+
+    <color name="txt_color">#646464</color>
+    <color name="white1">#FAF9FA</color>
+    <color name="maincolor">#2238CC</color>
+    <color name="mainbgcolor">#F6F6F6</color>
+    <color name="textcolor1">#000</color>
+    <color name="textcolor2">#7a84ad</color>
+</resources>

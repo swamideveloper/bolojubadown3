@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="adapter"
+            type="com.free.hdvideodownloaderapp.videodownloader.mvvmbalaji.Language_Adapter" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="model"
+            type="com.free.hdvideodownloaderapp.videodownloader.mvvmbalaji.LanguageModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background='@{adapter.selected == position? @drawable/language_shape_sel : @drawable/language_shape_unsel, default=@drawable/language_shape_sel}'
+        android:elevation="0.3dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/_10sdp"
+            android:src='@{model.image, default=@drawable/lan_eng}'
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_line"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/_9sdp"
+            android:layout_toRightOf="@+id/imageView2"
+            android:background="@color/maincolor"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_9sdp"
+            android:layout_toLeftOf="@+id/imageRadio"
+            android:layout_toRightOf="@+id/ll_line"
+            android:backgroundTint="#C4FFFFFF"
+            android:gravity="center_vertical"
+            android:text='@{model.name, default=@string/app_name}'
+            android:textColor="@color/textcolor1"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageRadio"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/_11sdp"
+            android:src='@{adapter.selected == position? @drawable/language_radio_button_checked : @drawable/language_radio_button_unchecked, default=@drawable/language_radio_button_unchecked}' />
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainCL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Aico_Socket.Aico_LiveCall">
+
+    <VideoView
+        android:id="@+id/videoview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/actionBlock"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/trans_round"
+            android:padding="10dp"
+            android:src="@drawable/png_blockuser"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/actionDialog"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/trans_round"
+            android:padding="10dp"
+            android:src="@drawable/ic_flag"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/iv_call_cut"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/cut"
+        android:gravity="center"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_opations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_call_end"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_connecting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/medi"
+            android:gravity="center"
+            android:text="Connecting..."
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </FrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/myVcall"
+        android:layout_width="80sp"
+        android:layout_height="130dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_opations"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <SurfaceView
+            android:id="@+id/imgSurface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+
+
+        <ImageView
+            android:id="@+id/vOff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray"
+            android:padding="20dp"
+            android:src="@drawable/ic_v_camera_off"
+            android:visibility="invisible"
+            app:tint="@color/white">
+
+
+        </ImageView>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_opations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_swich_camera"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/trans_round"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple_round"
+            android:padding="12dp"
+            android:src="@drawable/ic_swich_camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_video_on"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/iv_video_on"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/trans_round"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple_round"
+            android:padding="12dp"
+            android:src="@drawable/ic_v_camrea_on"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_voice_on"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_swich_camera"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/iv_video_off"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/trans_round"
+            android:foreground="@drawable/ripple_round"
+            android:src="@drawable/ic_v_camera_off"
+            android:visibility="gone"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_voice_on"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_swich_camera"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/silver" />
+
+        <ImageView
+            android:id="@+id/iv_voice_on"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/trans_round"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple_round"
+            android:padding="12dp"
+            android:src="@drawable/ic_voice_on"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_video_on"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/iv_voice_off"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/trans_round"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple_round"
+            android:src="@drawable/ic_voice_off"
+            android:visibility="gone"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/iv_video_on"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/silver" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

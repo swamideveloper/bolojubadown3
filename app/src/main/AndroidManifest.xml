@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.free.hdvideodownloaderapp.videodownloader"
+    tools:ignore="MissingLeanbackLauncher" >
+
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+        </intent>
+
+        <package android:name="com.facebook.katana" />
+
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+    </queries>
+    <queries>
+        <package android:name="com.whatsapp" />
+    </queries>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <application
+        android:name=".MykeepClass.Aico_Controller"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:networkSecurityConfig" >
+
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.freeActivity.freeDownloadsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.freeActivity.freeMainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.free_Reels.free_activity.free_Main_Reels_Activity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.TranslatorLanguageTranslatorVoiceTranslator" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.freeActivity.freeIntroActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.freeActivity.freeFeedbackActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.WhatsappStatus.activities.free_SC_StatusActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.WhatsappStatus.activities.freeFullStatusViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.WhatsappStatus.activities.freeFullViewActivityGAWhatsappTracker"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.WhatsappStatus.activities.freeSCBaseActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Social_Download.WhatsappStatus.activities.freeVideoPlayerActivityGAWhatsappTracker"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name=".callBasic.advance_loan__ActAdvanceloanSplash"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.free.hdvideodownloaderapp.videodownloader.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <service
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Services.MusicPlayback"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.free.hdvideodownloaderapp.videodownloader.action.CLOSE" />
+                <action android:name="com.free.hdvideodownloaderapp.videodownloader.action.PLAY_PAUSE" />
+                <action android:name="com.free.hdvideodownloaderapp.videodownloader.action.PLAY" />
+                <action android:name="com.free.hdvideodownloaderapp.videodownloader.action.REPEAT" />
+                <action android:name="com.free.hdvideodownloaderapp.videodownloader.action.TRACK_PREV" />
+                <action android:name="com.free.hdvideodownloaderapp.videodownloader.action.TRACK_NEXT" />
+                <action android:name="com.free.hdvideodownloaderapp.videodownloader.action.PERSISTENT_NOTIFICATION" />
+                <action android:name="android.intent.action.HEADSET_PLUG" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+                <action android:name="android.media.AUDIO_BECOMING_NOISY" />
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.MusicPlayer.Activity.free_ListActivity"
+            android:exported="false"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Activity.free_SearchVideoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.MusicPlayer.Activity.free_GlobalDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Activity.free_VideoFavouritelist"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Activity.free_Fragment_Tab_Activity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Activity.free_Option_Activity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name=".mvvmbalaji.SelectLanguage_Activity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvvmbalaji.Dating_Call_Onboarding_Activity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Activity.free_Music_PlayActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Activity.free_PlayListDetailActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Activity.free_VideoPlayingActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/black" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:scheme="file" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="application/x-subrip" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/ass" />
+                <data android:mimeType="application/ssa" />
+                <data android:mimeType="application/vtt" />
+                <data android:mimeType="application/ttml+xml" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Activity.free_Player_Act_VideoList"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+        <activity
+            android:name="com.free.hdvideodownloaderapp.videodownloader.Activity.free_SearchActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ColorStatusBarBilling" />
+
+
+        <activity
+            android:name=".Aico_Socket.Aico_VC_Manager"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Aico_Socket.Aico_LiveCall"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+    </application>
+
+</manifest>

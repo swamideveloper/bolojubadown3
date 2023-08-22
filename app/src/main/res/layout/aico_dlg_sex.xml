@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_dialog_sx"
+        android:gravity="center"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/txt_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/regu"
+            android:gravity="center"
+            android:padding="2dp"
+            android:paddingTop="10dp"
+            android:text="In order for everyone to have a good time here,\nplease be
+considerate to each other"
+            android:textColor="@color/red_light"
+            android:textSize="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_main"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_4sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:background="@drawable/ic_border"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_body" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="8dp"
+                    android:fontFamily="@font/regu"
+                    android:gravity="center"
+                    android:padding="@dimen/_4sdp"
+                    android:text="(X) Bare buttock or genitals"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_main"
+                android:layout_margin="@dimen/_4sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:background="@drawable/ic_border"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_block" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="8dp"
+                    android:fontFamily="@font/regu"
+                    android:gravity="center"
+                    android:padding="@dimen/_4sdp"
+                    android:text="(X) Nude, semi-nude or shirtless"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_main"
+                android:layout_margin="@dimen/_4sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_36sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:background="@drawable/ic_border"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_speak" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="8dp"
+                    android:fontFamily="@font/regu"
+                    android:gravity="center"
+                    android:text="(X) Other (vulgar language. violence, dangerous activities...)"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txt_con"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/my_button"
+                android:fontFamily="@font/medi"
+                android:gravity="center"
+                android:paddingTop="2dp"
+                android:text="Confirm"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,914 @@
+package com.free.hdvideodownloaderapp.videodownloader.Utils;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.res.ColorStateList;
+import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Handler;
+import android.provider.MediaStore;
+import android.text.Html;
+import android.text.SpannableString;
+
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import androidx.appcompat.widget.PopupMenu;
+import androidx.core.content.ContextCompat;
+
+import com.free.hdvideodownloaderapp.videodownloader.AddPlayList.Adapter.PlaylistFragmentAdapterSimple;
+import com.free.hdvideodownloaderapp.videodownloader.AddPlayList.HistoryUtility;
+import com.free.hdvideodownloaderapp.videodownloader.AddPlayList.Model.SongModel;
+import com.free.hdvideodownloaderapp.videodownloader.Log;
+import com.free.hdvideodownloaderapp.videodownloader.R;
+import com.free.hdvideodownloaderapp.videodownloader.Services.MusicPlayback;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.File;
+import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.TimeZone;
+import java.util.TreeMap;
+
+
+public class SongsUtils {
+
+    private final String TAG = "SongsManagerConsole";
+
+    private final Context context;
+    private final SharedPrefsUtils sharedPrefsUtils;
+    private static final ArrayList<SongModel> mainList = new ArrayList<>();
+    private static final ArrayList<SongModel> queue = new ArrayList<>();
+    private static final ArrayList<HashMap<String, String>> albums = new ArrayList<>();
+    private static final ArrayList<HashMap<String, String>> artists = new ArrayList<>();
+
+    public SongsUtils(Context context) {
+        this.context = context;
+        sharedPrefsUtils = new SharedPrefsUtils(context);
+        grabIfEmpty();
+        if (queue.isEmpty()) {
+            try {
+                Type type = new TypeToken<ArrayList<SongModel>>() {
+                }.getType();
+                ArrayList<SongModel> restoreData = new Gson().fromJson(sharedPrefsUtils.readSharedPrefsString("key", null), type);
+                replaceQueue(restoreData);
+                Log.e(TAG, "Retrieved queue from storage in SongsUtils. " + restoreData.size() + " songs!");
+            } catch (Exception e) {
+                Log.e(TAG, "Unable to retrieve data while queue is empty.");
+            }
+        }
+    }
+
+    public int getCurrentMusicID() {
+        int musicID = sharedPrefsUtils.readSharedPrefsInt("musicID", 0);
+        return (musicID > -1) ? musicID : 0;
+    }
+
+    public int getMainListSize() {
+        return mainList.size();
+    }
+
+    public void setCurrentMusicID(int musicID) {
+        sharedPrefsUtils.writeSharedPrefs("musicID", musicID);
+    }
+
+    public ArrayList<SongModel> queue() {
+        if (queue.isEmpty()) {
+            ArrayList<SongModel> list = new ArrayList<>(mainList);
+            Collections.reverse(list);
+            replaceQueue(list);
+        }
+        return (queue);
+    }
+
+    public ArrayList<SongModel> allSongs() {
+        grabIfEmpty();
+
+        ArrayList<SongModel> songs = new ArrayList<>(mainList);
+        Collections.sort(songs, new Comparator<SongModel>() {
+            @Override
+            public int compare(SongModel song1, SongModel song2) {
+                return song1.getTitle().compareTo(song2.getTitle());
+            }
+        });
+        return songs;
+    }
+
+    public ArrayList<SongModel> newSongs() {
+        grabIfEmpty();
+
+        ArrayList<SongModel> list = new ArrayList<>(mainList);
+        Collections.reverse(list);
+        return list;
+    }
+
+    public ArrayList<HashMap<String, String>> albums() {
+        grabIfEmpty();
+        return albums;
+    }
+
+    public ArrayList<SongModel> albumSongs(String album) {
+        ArrayList<SongModel> songs = new ArrayList<>();
+        ArrayList<SongModel> list = new ArrayList<>(mainList);
+        Collections.reverse(list);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getAlbum().equals(album)) {
+                songs.add(list.get(i));
+            }
+        }
+        return songs;
+    }
+
+    public ArrayList<HashMap<String, String>> artists() {
+        grabIfEmpty();
+        return artists;
+    }
+
+    public List<String> getAlbumIds(String rawAlbumIds) {
+        String SPLIT_EXPRESSION = ";,,;,;;";
+        List<String> list = new ArrayList<>();
+        String[] albumIDs = rawAlbumIds.split(SPLIT_EXPRESSION);
+        Collections.addAll(list, albumIDs);
+        return list;
+    }
+
+    public ArrayList<SongModel> artistSongs(String artist) {
+        ArrayList<SongModel> songs = new ArrayList<>();
+        ArrayList<SongModel> list = new ArrayList<>(mainList);
+        Collections.reverse(list);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getArtist().contains(artist)) {
+                songs.add(list.get(i));
+            }
+        }
+        return songs;
+    }
+
+
+    public ArrayList<SongModel> HistorySongs(List<String> idlist) {
+        ArrayList<SongModel> songs = new ArrayList<>();
+        ArrayList<SongModel> list = new ArrayList<>(mainList);
+
+        Collections.reverse(list);
+        for (int i = 0; i < list.size(); i++) {
+            if (idlist.contains(list.get(i).getAlbumID())) {
+                Log.e("resumehistory", "History5----" + list.get(i).getAlbumID());
+                songs.add(list.get(i));
+            }
+        }
+        Collections.reverse(songs);
+        return songs;
+    }
+
+
+    public ArrayList<HashMap<String, String>> getAllPlaylists() {
+        Playlist db = new Playlist(context);
+        db.open();
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
+        if (db.getCount() > 0) {
+            list = db.getAllRows();
+        }
+        db.close();
+        return list;
+    }
+
+    public HashMap<String, String> getPlaylist(int ID) {
+        Playlist db = new Playlist(context);
+        db.open();
+        HashMap<String, String> hash = db.getRow(ID);
+        db.close();
+        return hash;
+    }
+
+    public void addPlaylist(String name) {
+        Playlist db = new Playlist(context);
+        db.open();
+        db.addRow(name);
+        db.close();
+    }
+
+    public boolean ifPlaylistPresent(String name) {
+        Playlist db = new Playlist(context);
+        db.open();
+        boolean result = db.searchPlaylist(name);
+        db.close();
+        return result;
+    }
+
+    public void deletePlaylist(int id) {
+        Playlist db = new Playlist(context);
+        db.open();
+        db.deleteRow(id);
+        db.close();
+    }
+
+
+    public void removePlaylistSong(int PlayList, ArrayList<SongModel> newlist) {
+        PlaylistSongs db = new PlaylistSongs(context);
+        db.open();
+        db.deleteAll(PlayList);
+        for (int i = 0; i < newlist.size(); i++) {
+            db.addRow(PlayList, newlist.get(i));
+        }
+        db.close();
+    }
+
+    public ArrayList<SongModel> playlistSongs(int playlistID) {
+        ArrayList<SongModel> list = new ArrayList<>();
+        PlaylistSongs db = new PlaylistSongs(context);
+        db.open();
+        if (db.getCount(playlistID) > 0) {
+            list = db.getAllRows(playlistID);
+        }
+        db.close();
+        return list;
+    }
+
+    public void updatePlaylistSongs(int playlistID, ArrayList<SongModel> newList) {
+        PlaylistSongs db = new PlaylistSongs(context);
+        db.open();
+        db.deleteAll(playlistID);
+        for (int i = 0; i < newList.size(); i++) {
+            db.addRow(playlistID, newList.get(i));
+        }
+        db.close();
+    }
+
+    public ArrayList<SongModel> favouriteSongs() {
+        ArrayList<SongModel> list;
+        FavouriteList db = new FavouriteList(context);
+        db.open();
+        list = new ArrayList<>(db.getAllRows());
+        db.close();
+        return list;
+    }
+
+    public boolean addToFavouriteSongs(SongModel row) {
+        FavouriteList db = new FavouriteList(context);
+        db.open();
+        db.addRow(row);
+        db.close();
+        return true;
+    }
+
+    public void updateFavouritesList(ArrayList<SongModel> newFavList) {
+        FavouriteList db = new FavouriteList(context);
+        db.open();
+        db.deleteAll();
+        Collections.reverse(newFavList);
+        for (int i = 0; i < newFavList.size(); i++) {
+            db.addRow(newFavList.get(i));
+        }
+        db.close();
+    }
+
+    public ArrayList<SongModel> mostPlayedSongs() {
+        ArrayList<SongModel> list;
+        CategorySongs categorySongs = new CategorySongs(context);
+        categorySongs.open();
+        list = categorySongs.getAllRows(1);
+        categorySongs.close();
+        return list;
+    }
+
+    public void updateMostPlayedList(ArrayList<SongModel> newList) {
+        CategorySongs db = new CategorySongs(context);
+        db.open();
+        db.deleteAll(1);
+        for (int i = 0; i < newList.size(); i++) {
+            db.addRow(1, newList.get(i));
+        }
+        db.close();
+    }
+
+
+    public void sync() {
+        mainList.clear();
+        albums.clear();
+        artists.clear();
+        grabIfEmpty();
+    }
+
+    public void addToQueue(SongModel song) {
+        queue().add(song);
+        (new CommonUtils(context)).showTheToast("Added to current queue!");
+    }
+
+    public void addToQueue(ArrayList<SongModel> arrayList) {
+        ArrayList<SongModel> arrayList1 = new ArrayList<>(arrayList);
+        if (arrayList1.size() > 0) {
+            queue().addAll(arrayList1);
+            (new CommonUtils(context)).showTheToast("Added to current queue!");
+        } else {
+            (new CommonUtils(context)).showTheToast("Nothing to add");
+        }
+    }
+
+    public void playNext(SongModel song) {
+        queue().add(getCurrentMusicID() + 1, song);
+        (new CommonUtils(context)).showTheToast("Playing next: " + song.getTitle());
+    }
+
+    public boolean replaceQueue(final ArrayList<SongModel> list) {
+        if (list != null && !list.isEmpty()) {
+            clearQueue();
+            queue.addAll(list);
+            try {
+                new Thread(new Runnable() {
+                    public void run() {
+                        sharedPrefsUtils.writeSharedPrefs("key", new Gson().toJson(list));
+                    }
+                }).start();
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void generateMenu(PopupMenu popupMenus, int[] options) {
+        int i = 0;
+        while (i < options.length) {
+            String name = "INVALID";
+            if (options[i] == R.id.play_musicUtils) {
+                name = "Play";
+            } else if (options[i] == R.id.play_next_musicUtils) {
+                name = "Play Next";
+            } else if (options[i] == R.id.add_to_queue_musicUtils) {
+                name = "Add to Queue";
+            } else if (options[i] == R.id.add_to_playlist_musicUtils) {
+                name = "Add to Playlist";
+            } else if (options[i] == R.id.shuffle_play_musicUtils) {
+                name = "Shuffle Play";
+            } else if (options[i] == R.id.use_as_ringtone_musicUtils) {
+                name = "Use as Ringtone";
+            } else if (options[i] == R.id.remove_musicUtils) {
+                name = "Remove";
+            } else if (options[i] == R.id.info_musicUtils) {
+                name = "Track Info";
+            } else if (options[i] == R.id.goto_album_musicUtils) {
+                name = "Go to Album";
+            } else if (options[i] == R.id.goto_artist_musicUtils) {
+                name = "Go to Artist";
+            }
+            popupMenus.getMenu().add(0, options[i], 1, name);
+            MenuItem menuItem = popupMenus.getMenu().getItem(i);
+            CharSequence menuTitle = menuItem.getTitle();
+            SpannableString styledMenuTitle = new SpannableString(menuTitle);
+            menuItem.setTitle(styledMenuTitle);
+            i++;
+        }
+    }
+
+    public void play(Context contextt, int id, ArrayList<SongModel> array) {
+        Log.e("MusicUtilsConsole", "Initiating the play request to MusicPlayback Service");
+        Activity activity = (Activity) contextt;
+        HistoryUtility.addHistoryItem(activity, "" + array.get(id).getAlbumID());
+        HistoryUtility.removeFavoriteItem(activity);
+
+        if (!array.isEmpty()) {
+            File file = new File(array.get(id).getPath());
+            if (file.exists()) {
+                replaceQueue(array);
+                setCurrentMusicID(id);
+                Intent intent = new Intent(MusicPlayback.ACTION_PLAY);
+                Log.e("nasijcdicni", "=5=" + context);
+                ContextCompat.startForegroundService(context, createExplicitFromImplicitIntent(intent));
+
+            } else {
+                Toast.makeText(context,
+                        "Unable to play the song! Try syncing the library!",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void playNext(ArrayList<SongModel> arrayList) {
+        for (int i = arrayList.size() - 1; i >= 0; i--) {
+            playNext(arrayList.get(i));
+        }
+        (new CommonUtils(context)).showTheToast("Playing this list next!");
+    }
+
+    public void addToPlaylist(final ArrayList<SongModel> arrayList) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_addtoplaylist);
+
+        GridView listView = dialog.findViewById(R.id.listView);
+        ImageView relAdd = dialog.findViewById(R.id.add_playlist);
+        final PlaylistFragmentAdapterSimple playlistAdapter = new PlaylistFragmentAdapterSimple
+                (context);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PlaylistSongs db = new PlaylistSongs(context);
+                db.open();
+                int playListID = Integer.parseInt(Objects.requireNonNull(getAllPlaylists().get(position).get("ID")));
+                for (int i = 0; i < arrayList.size(); i++) {
+                    if (!db.getAllRows(playListID).contains(arrayList.get(i))) {
+                        db.addRow(playListID, arrayList.get(i));
+                    }
+                }
+                (new CommonUtils(context)).showTheToast(arrayList.size() +
+                        (arrayList.size() > 1 ? " songs are" : " song is") + " successfully added to playlist! ");
+                db.close();
+                if (dialog.isShowing()) {
+                    dialog.cancel();
+                }
+
+            }
+        });
+
+        relAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addPlayListDialog(playlistAdapter);
+            }
+
+        });
+        if (getAllPlaylists().size() == 0) {
+            dialog.findViewById(R.id.txtNoData).setVisibility(View.VISIBLE);
+        } else {
+            dialog.findViewById(R.id.txtNoData).setVisibility(View.GONE);
+        }
+        listView.setAdapter(playlistAdapter);
+
+
+        EditText input = dialog.findViewById(R.id.editText);
+        input.requestFocus();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+
+        dialog.findViewById(R.id.btnCreate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = input.getText().toString();
+                if (!name.isEmpty()) {
+                    addPlaylist(name);
+                    playlistAdapter.notifyDataSetChanged();
+                    dialog.cancel();
+                } else {
+                    Toast.makeText(context, "Please enter playlist name.", Toast.LENGTH_SHORT).show();
+                }
+
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        PlaylistSongs db = new PlaylistSongs(context);
+                        db.open();
+                        int playListID = Integer.parseInt(Objects.requireNonNull(getAllPlaylists().get(getAllPlaylists().size() - 1).get("ID")));
+                        for (int i = 0; i < arrayList.size(); i++) {
+                            if (!db.getAllRows(playListID).contains(arrayList.get(i))) {
+                                db.addRow(playListID, arrayList.get(i));
+                            }
+                        }
+                        (new CommonUtils(context)).showTheToast(arrayList.size() +
+                                (arrayList.size() > 1 ? " songs are" : " song is") + " successfully added to playlist! ");
+                        db.close();
+
+                    }
+                }, 400);
+
+            }
+        });
+
+
+        dialog.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        dialog.findViewById(R.id.btnCancel1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    public void addToPlaylist(final SongModel hash) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_addtoplaylist);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+
+        // set the custom dialog components - text, image and button
+        GridView listView = dialog.findViewById(R.id.listView);
+        ImageView relAdd = dialog.findViewById(R.id.add_playlist);
+        RelativeLayout albumArt = dialog.findViewById(R.id.albumArt);
+//        (new ImageUtils(context)).setAlbumArt(hash.getAlbumID(), albumArt);
+        final PlaylistFragmentAdapterSimple playlistAdapter = new PlaylistFragmentAdapterSimple
+                (context);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PlaylistSongs db = new PlaylistSongs(context);
+                db.open();
+                int playListID = Integer.parseInt(Objects.requireNonNull(getAllPlaylists().get(position).get("ID")));
+                if (!db.getAllRows(playListID).contains(hash)) {
+                    db.addRow(playListID, hash);
+                    (new CommonUtils(context)).showTheToast(hash.getTitle() + " is added to playlist! ");
+                } else {
+                    (new CommonUtils(context)).showTheToast("Error: Song is already in Playlist!");
+                }
+                db.close();
+                if (dialog.isShowing()) {
+                    dialog.cancel();
+                }
+            }
+        });
+
+        relAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addPlayListDialog(playlistAdapter);
+            }
+        });
+        if (getAllPlaylists().size() == 0) {
+            dialog.findViewById(R.id.txtNoData).setVisibility(View.VISIBLE);
+        } else {
+            dialog.findViewById(R.id.txtNoData).setVisibility(View.GONE);
+        }
+        listView.setAdapter(playlistAdapter);
+
+        EditText input = dialog.findViewById(R.id.editText);
+        input.requestFocus();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.findViewById(R.id.btnCreate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = input.getText().toString();
+                if (!name.isEmpty()) {
+                    addPlaylist(name);
+                    playlistAdapter.notifyDataSetChanged();
+                    dialog.cancel();
+                } else {
+                    Toast.makeText(context, "Please enter playlist name.", Toast.LENGTH_SHORT).show();
+                }
+
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        PlaylistSongs db = new PlaylistSongs(context);
+                        db.open();
+                        int playListID = Integer.parseInt(Objects.requireNonNull(getAllPlaylists().get(getAllPlaylists().size() - 1).get("ID")));
+                        if (!db.getAllRows(playListID).contains(hash)) {
+                            db.addRow(playListID, hash);
+                            (new CommonUtils(context)).showTheToast(hash.getTitle() + " is added to playlist! ");
+                        } else {
+                            (new CommonUtils(context)).showTheToast("Error: Song is already in Playlist!");
+                        }
+                        db.close();
+
+                    }
+                }, 400);
+
+            }
+        });
+
+
+        dialog.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        dialog.findViewById(R.id.btnCancel1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+
+        dialog.show();
+    }
+
+    private void addPlayListDialog(final PlaylistFragmentAdapterSimple playlistAdapter) {
+        final Dialog alertDialog = new Dialog(context);
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.setContentView(R.layout.dialog_add_playlist);
+
+        final EditText input = alertDialog.findViewById(R.id.editText);
+        input.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(context, (new CommonUtils(context)).accentColor(sharedPrefsUtils))));
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(input, InputMethodManager.SHOW_IMPLICIT);
+
+        Button btnCreate = alertDialog.findViewById(R.id.btnCreate);
+        btnCreate.setTextColor(ContextCompat.getColor(context, (new CommonUtils(context)).accentColor(sharedPrefsUtils)));
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = input.getText().toString();
+                if (!name.isEmpty()) {
+                    addPlaylist(name);
+                    playlistAdapter.notifyDataSetChanged();
+                    alertDialog.cancel();
+                } else {
+                    Toast.makeText(context, "Please enter playlist name.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        Button btnCancel = alertDialog.findViewById(R.id.btnCancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
+        alertDialog.show();
+    }
+
+    public void shufflePlay(Context context, int id, ArrayList<SongModel> array) {
+        ArrayList<SongModel> arrayList = new ArrayList<>(array);
+        if (arrayList.size() > 0) {
+            SongModel playerproSongModel = arrayList.get(id);
+            arrayList.remove(id);
+            Collections.shuffle(arrayList);
+            arrayList.add(0, playerproSongModel);
+            play(context, 0, arrayList);
+            (new CommonUtils(context)).showTheToast("Shuffling");
+        }
+    }
+
+    public void shufflePlay(Context context, ArrayList<SongModel> array) {
+        ArrayList<SongModel> data = new ArrayList<>(array);
+        if (data.size() > 0) {
+            Collections.shuffle(data);
+            play(context, 0, data);
+            (new CommonUtils(context)).showTheToast("Shuffling");
+        } else {
+            (new CommonUtils(context)).showTheToast("Nothing to shuffle");
+        }
+    }
+
+    public AlertDialog info(SongModel playerproSongModel) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(playerproSongModel.getTitle());
+        String redString = context.getResources().getString(R.string.DONE);
+
+        builder.setMessage("\nFile Name: " + playerproSongModel.getFileName() + "\n\n" +
+                "Song Title: " + playerproSongModel.getTitle() + "\n\n" +
+                "Album: " + playerproSongModel.getAlbum() + "\n\n" +
+                "Artist: " + playerproSongModel.getArtist() + "\n\n" +
+                "Length: " + playerproSongModel.getDuration() + "\n\n" +
+                "File location: " + playerproSongModel.getPath());
+        builder.setPositiveButton(((Html.fromHtml(redString))), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        return builder.create();
+    }
+
+    private Intent createExplicitFromImplicitIntent(Intent implicitIntent) {
+        PackageManager pm = context.getPackageManager();
+        List<ResolveInfo> resolveInfo = pm.queryIntentServices(implicitIntent, 0);
+        if (resolveInfo == null || resolveInfo.size() != 1) {
+            for (ResolveInfo info:resolveInfo){
+                Log.e(TAG, "createExplicitFromImplicitIntent: "+info.resolvePackageName);
+            }
+            return null;
+        }
+        ResolveInfo serviceInfo = resolveInfo.get(0);
+        String packageName = serviceInfo.serviceInfo.packageName;
+        String className = serviceInfo.serviceInfo.name;
+        ComponentName component = new ComponentName(packageName, className);
+        Intent explicitIntent = new Intent(implicitIntent);
+        explicitIntent.setComponent(component);
+        return explicitIntent;
+    }
+
+
+    private void clearQueue() {
+        queue.clear();
+    }
+
+    private int getIndexAlbum(String albumName, ArrayList<HashMap<String, String>> list) {
+        for (int i = 0; i < list.size(); i++) {
+            String auction = list.get(i).get("album");
+            if (albumName.equals(auction)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int getIndexArtist(String artistName, ArrayList<HashMap<String, String>> list) {
+        for (int i = 0; i < list.size(); i++) {
+            String auction = list.get(i).get("artist");
+            if (artistName.equals(auction)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void grabIfEmpty() {
+        if (mainList.isEmpty()) {
+            grabData();
+            Log.e(TAG, "Grabbing data for player...");
+        } else {
+            Log.e(TAG, "Data is present. Just setting context.");
+        }
+    }
+
+    private void grabData() {
+
+        boolean excludeShortSounds = sharedPrefsUtils.readSharedPrefsBoolean("excludeShortSounds", false);
+        boolean excludeWhatsApp = sharedPrefsUtils.readSharedPrefsBoolean("excludeWhatsAppSounds", false);
+
+        Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        String[] projection = new String[]{
+                MediaStore.Audio.Media.DURATION,
+                MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.DISPLAY_NAME,
+                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.ARTIST,
+                MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.ALBUM_ID
+        };
+
+        try (Cursor cursor = context.getContentResolver().query(
+                uri, projection, null, null, null
+        )) {
+            int songNameColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DISPLAY_NAME);
+            int durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION);
+            int pathColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+            int titleColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE);
+            int artistColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST);
+            int albumColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM);
+            int albumIDColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID);
+
+            while (cursor.moveToNext()) {
+                int currentDuration = Math.round((cursor.getInt(durationColumn)));
+                if (currentDuration > ((excludeShortSounds) ? 60000 : 0)) {
+                    if (!excludeWhatsApp || !cursor.getString(albumColumn).equals("WhatsApp Audio")) {
+                        TimeZone tz = TimeZone.getTimeZone("UTC");
+                        SimpleDateFormat df = new SimpleDateFormat("mm:ss", Locale.getDefault());
+                        df.setTimeZone(tz);
+                        String time = String.valueOf(df.format(currentDuration));
+                        SongModel playerproSongModel = new SongModel();
+                        playerproSongModel.setFileName(cursor.getString(songNameColumn));
+                        playerproSongModel.setTitle(cursor.getString(titleColumn));
+                        playerproSongModel.setArtist(cursor.getString(artistColumn));
+                        playerproSongModel.setAlbum(cursor.getString(albumColumn));
+                        playerproSongModel.setAlbumID(cursor.getString(albumIDColumn));
+                        playerproSongModel.setPath(cursor.getString(pathColumn));
+                        playerproSongModel.setDuration(time);
+
+                        mainList.add(playerproSongModel);
+                    }
+                }
+            }
+        }
+
+        ArrayList<SongModel> allSongList = new ArrayList<>(mainList);
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
+        for (int i = 0; i < allSongList.size(); i++) {
+            String name = allSongList.get(i).getAlbum();
+            String artist = allSongList.get(i).getArtist();
+            int albumIndex = -1;
+            if (list.size() > 0) {
+                for (int j = 0; j < list.size(); j++) {
+                    String auction = list.get(j).get("album");
+                    if (name.equals(auction)) {
+                        albumIndex = j;
+                    }
+                }
+            }
+            if (albumIndex == -1) {
+
+                HashMap<String, String> song = new HashMap<>();
+                song.put("album", name);
+                song.put("artist", artist);
+                list.add(song);
+            }
+        }
+
+        ArrayList<HashMap<String, String>> list2 = new ArrayList<>();
+        Map<String, String> sortedMap = new TreeMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            sortedMap.put(Objects.requireNonNull(list.get(i).get("album")),
+                    Objects.requireNonNull(list.get(i).get("album")));
+        }
+        for (Map.Entry<String, String> entry : sortedMap.entrySet()) {
+            HashMap<String, String> song = new HashMap<>();
+            String title = entry.getValue();
+            int index = getIndexAlbum(title, list);
+            song.put("album", list.get(index).get("album"));
+            song.put("artist", list.get(index).get("artist"));
+            list2.add(song);
+        }
+
+        albums.addAll(list2);
+
+
+        String SPLIT_EXPRESSION = ";,,;,;;";
+        list.clear();
+        list2.clear();
+        sortedMap.clear();
+
+        for (int i = 0; i < allSongList.size(); i++) {
+
+            String name = allSongList.get(i).getArtist();
+            String albums = allSongList.get(i).getAlbum();
+
+            int albumIndex = -1;
+            if (list.size() > 0) {
+                for (int j = 0; j < list.size(); j++) {
+                    String auction = list.get(j).get("artist");
+                    if (name.equals(auction)) {
+                        albumIndex = j;
+                    }
+                }
+            }
+
+            if (albumIndex > -1) {
+                if (albums != null) {
+                    String[] albumSplit = Objects.requireNonNull(list.get(albumIndex).get("albums")).split(SPLIT_EXPRESSION);
+                    boolean found = false;
+                    for (String anAlbumSplit : albumSplit) {
+                        if (anAlbumSplit.trim().equals(albums)) {
+                            found = true;
+                        }
+                    }
+                    if (!found) {
+                        albums = list.get(albumIndex).get("albums") + SPLIT_EXPRESSION + allSongList.get(i).getAlbum();
+                    }
+
+                }
+            }
+
+            if (albumIndex == -1) {
+
+                HashMap<String, String> song = new HashMap<>();
+                song.put("artist", name);
+                song.put("albums", albums);
+                list.add(song);
+            } else {
+                HashMap<String, String> song = new HashMap<>();
+                song.put("artist", name);
+                song.put("albums", albums);
+                list.add(albumIndex, song);
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            sortedMap.put(Objects.requireNonNull(list.get(i).get("artist")),
+                    Objects.requireNonNull(list.get(i).get("artist")));
+        }
+        for (Map.Entry<String, String> entry : sortedMap.entrySet()) {
+            HashMap<String, String> song = new HashMap<>();
+            String title = entry.getValue();
+            int index = getIndexArtist(title, list);
+            song.put("artist", list.get(index).get("artist"));
+            song.put("albums", list.get(index).get("albums"));
+            list2.add(song);
+        }
+
+        artists.addAll(list2);
+
+        Log.e(TAG, "grabData() performed");
+    }
+}

@@ -1,0 +1,4 @@
+rootProject.name = "video player bc"
+include ':app'
+include ':bolojuba'
+include ':m3u8lib'

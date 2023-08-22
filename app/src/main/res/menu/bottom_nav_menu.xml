@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_download"
+        android:icon="@drawable/ic_download1"
+        android:title="@string/Downloads" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_status_saver"
+        android:icon="@drawable/ic_wa_status_down"
+        android:title="WhatsApp Status" />
+
+</menu>

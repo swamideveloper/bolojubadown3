@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+            <ImageView
+                android:id="@+id/drawer"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:foregroundGravity="center"
+                android:src="@drawable/back1" />
+
+            <RelativeLayout
+                android:id="@+id/openapp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_toLeftOf="@id/download"
+                android:layout_toRightOf="@id/drawer">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/monstserratmedium"
+                    android:gravity="center"
+                    android:text="Status Saver"
+                    android:textColor="#3C3C3C"
+                    android:textSize="@dimen/_14ssp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/download"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:layout_toLeftOf="@id/icon"
+                android:foregroundGravity="center"
+                android:padding="@dimen/_2sdp"
+                android:src="@drawable/wass_download_btn"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_4sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/wass_img_whats" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingHorizontal="5dp"
+            android:layout_above="@+id/adsContainer"
+            android:layout_below="@id/ll">
+
+            <LinearLayout
+                android:id="@+id/lin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:elevation="10dp"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tab1"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="@dimen/_15sdp"
+                        android:adjustViewBounds="true"
+                        android:layout_margin="3dp"
+                        android:background="@drawable/orange_rects"
+                        android:fontFamily="@font/wass_montserrat_mediummm"
+                        android:gravity="center"
+                        android:text="Images"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <View
+                        android:visibility="gone"
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="@drawable/app_indicator"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tab2"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_margin="3dp"
+                        android:paddingHorizontal="@dimen/_15sdp"
+                        android:background="@drawable/plan_rect"
+                        android:fontFamily="@font/wass_montserrat_mediummm"
+                        android:gravity="center"
+                        android:text="Videos"
+                        android:textColor="@color/wass_grey"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <View
+                        android:visibility="gone"
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="@drawable/app_indicator" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/tab3"
+                        android:layout_margin="3dp"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/plan_rect"
+                        android:adjustViewBounds="true"
+                        android:paddingHorizontal="@dimen/_15sdp"
+                        android:fontFamily="@font/wass_montserrat_mediummm"
+                        android:gravity="center"
+                        android:text="Saved"
+                        android:textColor="@color/wass_grey"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <View
+                        android:visibility="gone"
+                        android:id="@+id/view3"
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/app_indicator"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/lin"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <RelativeLayout
+                                android:id="@+id/iv_no_Found_data"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/i1"
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:adjustViewBounds="true"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingBottom="@dimen/_10sdp"
+                                    android:src="@drawable/wass_nodata" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/i1"
+                                    android:layout_marginTop="@dimen/_15sdp"
+                                    android:fontFamily="@font/wass_montserrat_mediummm"
+                                    android:gravity="center"
+                                    android:text="No Data Found"
+                                    android:textColor="#AEACAC"
+                                    android:textSize="@dimen/_15sdp" />
+
+                            </RelativeLayout>
+
+                            <androidx.viewpager.widget.ViewPager
+                                android:id="@+id/viewPager"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/adsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

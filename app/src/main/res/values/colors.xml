@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_color">#2238CC</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="black_trans">#4D000000</color>
+    <color name="colorPrimary">#2238CC</color>
+    <color name="silver_light">#ECECEC</color>
+    <color name="colorPrimaryDark">#2238CC</color>
+    <color name="colorAccent">#2238CC</color>
+    <color name="colorPrimary90">#2238CC</color>
+<!--    <color name="colorPrimary90">#EADDFF</color>-->
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+    <color name="transparent">#00000000</color>
+    <color name="gradient_start_color">#FF2437</color>
+    <color name="yellow">#FF2437</color>
+    <color name="red">#FF2437</color>
+    <color name="green">#FF2437</color>
+    <color name="orange">#FF2437</color>
+    <color name="pink">#FF2437</color>
+    <color name="purple">#FF2437</color>
+    <color name="gray">#9C9C9C</color>
+    <color name="l_gray">#CCCCCC</color>
+    <color name="dark_gray">#373737</color>
+    <!--    <color name="orange">#FF515B</color>-->
+    <color name="cyan">#FF2437</color>
+
+    <color name="trans_color">#1FFF2437</color>
+    <!-- Standardized Colors -->
+
+
+
+    <color name="progressBarBackground">#44ffffff</color>
+    <color name="light_ap">#DCD7F8</color>
+    <color name="dark_bg">#E5E5E5</color>
+    <color name="gry">#989898</color>
+    <color name="gray_them">#F4F4F4</color>
+    <color name="unfill">#000</color>
+    <color name="back">#F6FAFD</color>
+    <color name="grey">#787777</color>
+    <color name="light_tra">#75000000</color>
+    <color name="set_unfill">#525252</color>
+    <color name="unfill_fav">#969696</color>
+    <color name="unfill_gry">#5D5B5B</color>
+    <color name="bg">#ffffff</color>
+
+
+    <color name="colorGray">#AFAFAF</color>
+
+    <!-- Standardized Colors -->
+    <color name="textColorTitle">#000000</color>
+    <color name="colone">#0D246A</color>
+    <color name="coltwo">#0D246A</color>
+    <color name="colthre">#0D246A</color>
+    <color name="textColor">#3F434C</color>
+    <color name="purple_500">#252A2E</color>
+    <color name="purple_700">#252A2E</color>
+    <color name="teal_200">#0D246A</color>
+    <color name="teal_700">#0D246A</color>
+    <color name="black_txt">#A1A2A4</color>
+    <color name="shuffelcolor">#086FFF</color>
+    <color name="bg_color">#F9F9F9</color>
+    <color name="radio_button">#757575</color>
+    <color name="image_selected">#99004400</color>
+    <color name="image_not_selected">#00000000</color>
+    <color name="wass_colorcontrolactivated">#F4EAD4</color>
+    <color name="red_light">#E63030</color>
+    <color name="wass_green">#0D246A</color>
+    <color name="wass_grey">#3C3C3C</color>
+    <color name="wass_whatsapp">#0D246A</color>
+    <color name="wass_app_greeen">#0D246A</color>
+    <color name="wass_white">#ffffff</color>
+    <color name="tab_indicator_gray">#c0c0c0</color>
+    <color name="dialog_background">#212121</color>
+    <color name="text_shadow">#7e7e7e</color>
+    <color name="intro_title_color">#000000</color>
+
+    <color name="b1">#4029D6</color>
+    <color name="b2">#23A8F5</color>
+
+    <color name="blue">#2278F3</color>
+    <color name="light_black">#2C2C2C</color>
+
+</resources>

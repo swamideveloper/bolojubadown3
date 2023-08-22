@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DoubleTapPlayerView">
+        <attr name="dtpv_controller" format="reference"></attr>
+        <attr name="subtitletxt" format="reference" />
+        <attr name="titletxt" format="reference" />
+        <attr name="mainbackground" format="reference" />
+    </declare-styleable>
+</resources>

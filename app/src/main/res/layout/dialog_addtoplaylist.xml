@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:elevation="0dp"
+    android:backgroundTint="@color/white"
+    android:background="@drawable/dialog_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+        <RelativeLayout
+            android:id="@+id/albumArt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_39sdp">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/nunito_bold"
+                android:gravity="center"
+                android:text="PlayList"
+
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_13sdp" />
+
+            <ImageView
+                android:id="@+id/add_playlist"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="?attr/selectableItemBackground"
+                android:padding="5dp"
+                android:tint="@color/black"
+                android:src="@drawable/app_playlist"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/btnCancel"
+                android:layout_width="@dimen/_39sdp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="@dimen/_1sdp"
+                android:src="@drawable/cancel_x"
+                android:tint="@color/black"
+                android:visibility="visible" />
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/lll_line"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/albumArt"
+            android:background="#E8E7E7"/>
+
+
+        <RelativeLayout
+            android:id="@+id/r1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lll_line">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginVertical="@dimen/_8sdp"
+                android:fontFamily="@font/nunito_semi_bold"
+                android:text="New Playlist"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:layout_below="@+id/textView9"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:background="@drawable/editbox_bgg"
+                android:backgroundTint="@color/dark_bg"
+                android:fontFamily="@font/nunito_regular"
+                android:hint="Enter Playlist Name"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:elevation="@dimen/_2sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:scrollIndicators="start"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editText"
+                android:layout_marginVertical="@dimen/_9sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/nunito_semi_bold"
+                android:text="Choose Playlist"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <GridView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_below="@+id/textView"
+                android:divider="@null"
+                android:scrollbars="none"
+                android:paddingHorizontal="@dimen/_2sdp"
+                android:dividerHeight="0dp"
+                android:numColumns="2" />
+            <LinearLayout
+                android:id="@+id/txtNoData"
+                android:layout_below="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:src="@drawable/nodatafound" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/nunito_semi_bold"
+                    android:gravity="center"
+                    android:text="No Playlist Found"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_below="@+id/textView"
+                android:layout_marginTop="@dimen/_109sdp"
+                android:layout_marginBottom="@dimen/_9sdp"
+                android:layout_marginHorizontal="@dimen/_9sdp"
+                android:layout_height="@dimen/_35sdp">
+                <TextView
+                    android:id="@+id/btnCancel1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/editText"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_toStartOf="@+id/btnCreate"
+                    android:layout_toLeftOf="@+id/btnCreate"
+                    android:background="@drawable/editbox_bgg"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="Cancel"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:elevation="@dimen/_1sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/nunito_semi_bold"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/btnCreate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_below="@+id/editText"
+                    android:layout_alignEnd="@+id/editText"
+                    android:layout_alignRight="@+id/editText"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:background="@drawable/editbox_bgg"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="Create"
+                    android:gravity="center"
+                    android:elevation="@dimen/_1sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/nunito_semi_bold"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>

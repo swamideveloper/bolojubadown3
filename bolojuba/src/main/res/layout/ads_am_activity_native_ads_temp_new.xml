@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/cardSmallTemplate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        >
+
+            <com.sdk.ads.ads.TemplateViewNew
+                android:id="@+id/my_template_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:gnt_template_type="@layout/ad_unit_admob_small_new" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cardLargeTemplate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+           >
+
+            <com.sdk.ads.ads.TemplateViewNew
+                android:id="@+id/my_template_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:gnt_template_type="@layout/ad_unit_admob_med_new" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

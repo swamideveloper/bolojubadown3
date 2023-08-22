@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_music_dock"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="@dimen/_55sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvAlbumArt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                android:layout_centerVertical="true"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="@dimen/_5sdp">
+                <ImageView
+                    android:id="@+id/albumArt"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/empty_music" />
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/cvAlbumArt">
+
+                <Button
+                    android:id="@+id/Xbutton1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/relativeLayout1"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:paddingHorizontal="@dimen/_5sdp" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true">
+
+                    <ImageView
+                        android:id="@+id/XbtnPlay"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_play_round_1" />
+                    <!--                        android:src="@drawable/ic_play_" />-->
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/relativeLayout1">
+
+                    <TextView
+                        android:id="@+id/XtextView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:ellipsize="marquee"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/nunito_semi_bold"
+                        android:includeFontPadding="false"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="layout_alignParentStart"
+                        android:textColor="@color/black"
+                        android:textScaleX="1.05"
+                        android:textSize="@dimen/_9sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/XtextView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/XtextView1"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/nunito_regular"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:paddingTop="0dp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="abhi opanchakfoisjfi "
+                        android:textColor="@color/black"
+                        android:textScaleX="1.05"
+                        android:textSize="@dimen/_7sdp"
+                        android:textStyle="bold" />
+                    <SeekBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxHeight="@dimen/_3sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_below="@+id/XtextView2"
+                        android:background="@color/transparent"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:paddingHorizontal="@dimen/_minus3sdp"
+                        android:progressDrawable="@drawable/bg_seekbar1"
+                        android:thumb="@drawable/player_seekbar_thumb1" />
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/top"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/current_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/nunito_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="0.00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_8sdp"
+                android:visibility="visible" />
+
+
+
+            <TextView
+                android:id="@+id/total_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/nunito_regular"
+                android:includeFontPadding="false"
+                android:text="0.00"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_8sdp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
